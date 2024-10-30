@@ -1,19 +1,19 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { RolesModule } from './roles/roles.module';
-import { AuthModule } from './auth/auth.module';
-import { CommonModule } from './common/common.module';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { ConfigModule } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { UsersModule } from "./users/users.module";
+import { RolesModule } from "./roles/roles.module";
+import { AuthModule } from "./auth/auth.module";
+import { CommonModule } from "./common/common.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
-        type: 'postgres',
+        type: "postgres",
         host: process.env.DB_HOST,
         port: parseInt(process.env.DB_PORT) || 3306,
         username: process.env.DB_USER,
@@ -25,7 +25,7 @@ import { CommonModule } from './common/common.module';
     UsersModule,
     RolesModule,
     AuthModule,
-    CommonModule
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],

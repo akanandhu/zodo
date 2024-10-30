@@ -5,7 +5,7 @@ import {
   HttpStatus,
   Injectable,
   Logger,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
 @Injectable()
 export class CatchFilter implements ExceptionFilter {
@@ -25,7 +25,7 @@ export class CatchFilter implements ExceptionFilter {
 
       res.status(statusCode).json({
         status: false,
-        message: 'Internal Server Error',
+        message: "Internal Server Error",
         exception: exception.message ?? null,
       });
     }
@@ -37,15 +37,15 @@ export class CatchFilter implements ExceptionFilter {
         case HttpStatus.BAD_REQUEST:
           res.status(statusCode).json({
             status: false,
-            message: 'Validation failed',
+            message: "Validation failed",
             validationErrors: (r as any).message,
           });
 
           break;
         default:
           const message =
-            typeof r === 'string' ? r : (r as any).message || (r as any).error;
-          const token = typeof r === 'string' ? r : (r as any).token;
+            typeof r === "string" ? r : (r as any).message || (r as any).error;
+          const token = typeof r === "string" ? r : (r as any).token;
           res.status(statusCode).json({
             status: false,
             message,

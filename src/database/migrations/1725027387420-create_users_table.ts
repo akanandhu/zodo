@@ -1,73 +1,73 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateUsersTable1725027387420 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: "users",
         columns: [
           {
-            name: 'id',
-            type: 'uuid',
+            name: "id",
+            type: "uuid",
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'uuid',
+            generationStrategy: "uuid",
           },
           {
-            name: 'first_name',
-            type: 'varchar',
+            name: "first_name",
+            type: "varchar",
             isNullable: false,
           },
           {
-            name: 'last_name',
-            type: 'varchar',
+            name: "last_name",
+            type: "varchar",
             isNullable: false,
           },
           {
-            name: 'user_type',
-            type: 'varchar',
+            name: "user_type",
+            type: "varchar",
             isNullable: true,
           },
           {
-            name: 'email',
-            type: 'varchar',
+            name: "email",
+            type: "varchar",
             isUnique: true,
             isNullable: true,
           },
           {
-            name: 'phone',
-            type: 'varchar',
+            name: "phone",
+            type: "varchar",
             isNullable: true,
           },
           {
-            name: 'password',
-            type: 'varchar',
+            name: "password",
+            type: "varchar",
             isNullable: true,
           },
           {
-            name: 'is_active',
-            type: 'boolean',
+            name: "is_active",
+            type: "boolean",
             isNullable: false,
-            default: 'true',
+            default: "true",
           },
           {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'NOW()',
+            name: "created_at",
+            type: "timestamp",
+            default: "NOW()",
           },
           {
-            name: 'updated_at',
-            type: 'timestamp',
-            default: 'NOW()',
-            onUpdate: 'NOW()',
+            name: "updated_at",
+            type: "timestamp",
+            default: "NOW()",
+            onUpdate: "NOW()",
           },
           {
-            name: 'deleted_at',
-            type: 'timestamp',
+            name: "deleted_at",
+            type: "timestamp",
             isNullable: true,
           },
         ],
-      })
+      }),
     );
 
     // Create enum type for user_type in PostgreSQL
@@ -83,7 +83,7 @@ export class CreateUsersTable1725027387420 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable("users");
     await queryRunner.query(`DROP TYPE "user_type_enum"`);
   }
 }

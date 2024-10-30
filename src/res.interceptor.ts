@@ -5,10 +5,10 @@ import {
   CallHandler,
   HttpStatus,
   HttpException,
-} from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { DeleteResult } from 'typeorm';
+} from "@nestjs/common";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { DeleteResult } from "typeorm";
 
 @Injectable()
 export class ResInterceptor implements NestInterceptor {
@@ -22,13 +22,13 @@ export class ResInterceptor implements NestInterceptor {
           throw new HttpException(
             {
               status: false,
-              message: 'did not delete any resource',
+              message: "did not delete any resource",
             },
             HttpStatus.EXPECTATION_FAILED,
           );
         }
 
-        if (typeof response === 'string') {
+        if (typeof response === "string") {
           return {
             status: true,
             message: response,

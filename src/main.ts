@@ -1,22 +1,22 @@
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { json } from 'express';
-import { useContainer } from 'class-validator';
-import { ResInterceptor } from './res.interceptor';
-import { CatchFilter } from './catch.interceptor';
+import { ClassSerializerInterceptor, ValidationPipe } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { NestFactory, Reflector } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { json } from "express";
+import { useContainer } from "class-validator";
+import { ResInterceptor } from "./res.interceptor";
+import { CatchFilter } from "./catch.interceptor";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bodyParser: false,
   });
 
-  app.use(json({ limit: '5mb' }));
+  app.use(json({ limit: "5mb" }));
   app.enableCors();
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix("api");
 
   app.useGlobalPipes(
     new ValidationPipe({

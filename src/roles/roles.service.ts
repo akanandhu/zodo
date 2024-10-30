@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
-import { Repository } from 'typeorm';
-import { Role } from './entities/role.entity';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from "@nestjs/common";
+import { CreateRoleDto } from "./dto/create-role.dto";
+import { UpdateRoleDto } from "./dto/update-role.dto";
+import { Repository } from "typeorm";
+import { Role } from "./entities/role.entity";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class RolesService {
@@ -12,7 +12,7 @@ export class RolesService {
     private roleRepository: Repository<Role>,
   ) {}
   create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
+    return "This action adds a new role";
   }
 
   findAll() {

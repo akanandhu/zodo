@@ -1,12 +1,11 @@
-import { Module } from '@nestjs/common';
-import { ResponseService } from './services/response.service';
-import { ConfigModule } from '@nestjs/config';
-
+import { Module } from "@nestjs/common";
+import { ResponseService } from "./services/response.service";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
-    controllers: [],
-    imports: [ConfigModule],
-    providers: [ResponseService],
-    exports: [CommonModule, ConfigModule, ResponseService]
+  controllers: [],
+  imports: [ConfigModule],
+  providers: [ResponseService],
+  exports: [CommonModule, ConfigModule, ResponseService],
 })
-export class CommonModule { }
+export class CommonModule {}

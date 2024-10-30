@@ -7,16 +7,15 @@ import {
   Param,
   Delete,
   Headers,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { SignInDto } from './dto/signIn.dto';
+} from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { SignInDto } from "./dto/signIn.dto";
 
-
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
-  @Post('login')
+  @Post("login")
   signIn(@Body() signInDto: SignInDto, @Headers() headers: any) {
     return this.authService.signIn(signInDto, headers);
   }

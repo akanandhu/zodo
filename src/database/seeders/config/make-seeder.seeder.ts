@@ -1,14 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 const className = process.argv[2];
 
 if (!className) {
-  console.error('Please provide a class name');
+  console.error("Please provide a class name");
   process.exit(1);
 }
 
-const directory = path.join(__dirname, './');
+const directory = path.join(__dirname, "./");
 
 const seederContent = `
 import { Injectable } from '@nestjs/common';
@@ -32,7 +32,7 @@ const filePath = path.join(directory, fileName);
 filePath;
 fs.writeFile(filePath, seederContent, (err) => {
   if (err) {
-    console.error('Error creating seeder file:', err);
+    console.error("Error creating seeder file:", err);
   } else {
     console.log(`Seeder file "${filePath}" created successfully!`);
   }
