@@ -23,27 +23,22 @@ export class HospitalsService {
 
   async create(createHospitalDto: CreateHospitalDto) {
     try {
+      const { admin, ...rest } = createHospitalDto;
+      const hospital = this.hospitalRepository.create(rest);
+      const createdUserRole = 'hsAdmin'
       const createUserDto: CreateUserDto = {
         first_name: createHospitalDto.admin.name,
         last_name: "",
-        user_type: "hsAdmin",
+        user_type: "staff",
         email: createHospitalDto.admin.email,
         password: "Password",
         is_active: true,
+        hospital_id: hospital.id,
+        role: createdUserRole,
       };
-      const adminUser = await this.userService.create(createUserDto);
+      const user = await this.userService.create(createUserDto);
 
-      const hospital = this.hospitalRepository.create({
-        ...createHospitalDto,
-        admins: [
-          {
-            name: adminUser.first_name,
-            email: adminUser.email,
-            password: adminUser.password,
-            role: "hsAdmin",
-          },
-        ],
-      });
+      await this.userService.addRoleToUser(user, createdUserRole);
 
       await this.hospitalRepository.save(hospital);
       return {
@@ -52,15 +47,16 @@ export class HospitalsService {
         data: hospital,
       };
     } catch (err) {
+      console.log(err, 'errorCheck')
       throw new InternalServerErrorException("Failed to create hospital");
     }
   }
 
   findAll(query: PaginateQuery) {
     return paginate(query, this.hospitalRepository, {
-      sortableColumns: ['id'],
-      maxLimit: 20
-    })
+      sortableColumns: ["id"],
+      maxLimit: 20,
+    });
   }
 
   async findOne(id: string): Promise<Hospital> {

@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsEmail,
   IsBoolean,
+  IsUUID,
 } from "class-validator";
 
 export class CreateUserDto {
@@ -14,8 +15,8 @@ export class CreateUserDto {
   last_name: string;
 
   @IsOptional()
-  @IsEnum(["superAdmin", "client", "user", "staff", "hsAdmin"])
-  user_type?: "superAdmin" | "client" | "user" | "staff" | "hsAdmin";
+  @IsEnum(["superAdmin", "client", "user", "staff"])
+  user_type?: "superAdmin" | "client" | "user" | "staff";
 
   @IsOptional()
   @IsEmail()
@@ -32,4 +33,10 @@ export class CreateUserDto {
   @IsOptional()
   @IsBoolean()
   is_active?: boolean;
+
+  @IsString()
+  role: "hsAdmin" | "doctor" ;
+
+  @IsUUID()
+  hospital_id: string;
 }
