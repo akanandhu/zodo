@@ -11,26 +11,26 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private authTokenService: AuthTokenervice,
-    private responseService: ResponseService,
+    private responseService: ResponseService
   ) {}
   async signIn(signInDto: SignInDto, headers: any) {
     const user = await this.validateUser(signInDto, headers);
     const tokens = await this.authTokenService.generateTokens(
       user.id,
-      user.email,
+      user.email
     );
     user["tokens"] = tokens;
 
     return this.responseService.successResponse(
       "user logged successfully",
-      user,
+      user
     );
   }
 
   async validateUser(signInDto: SignInDto, headers: any): Promise<User> {
     const { email, password } = signInDto;
     const appType = headers["x_app_type"];
-
+    console.log(password, 'passCheck')
     const user = await this.usersService.findOneByParam({ email: email });
     if (!user || !user.password || !(await user.validatePassword(password))) {
       throw new UnauthorizedException({

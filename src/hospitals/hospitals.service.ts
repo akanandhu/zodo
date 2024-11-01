@@ -48,7 +48,7 @@ export class HospitalsService {
       return {
         statusCode: HttpStatus.CREATED,
         message: "Hospital created successfully",
-        data: hospital
+        data: hospital,
       };
     } catch (err) {
       throw new InternalServerErrorException("Failed to create hospital");
@@ -71,14 +71,23 @@ export class HospitalsService {
     id: string,
     updateHospitalDto: UpdateHospitalDto
   ): Promise<Hospital> {
-    await this.hospitalRepository.update(id, updateHospitalDto);
-    const updatedHospital = await this.hospitalRepository.findOne({
-      where: { id },
-    });
-    if (!updatedHospital) {
-      throw new NotFoundException(`Hospital with ID ${id} not found`);
+    try {
+      const hospital = await this.hospitalRepository.findOne({
+        where: { id },
+      });
+      if (!hospital) {
+        throw new NotFoundException(`Hospital with ID ${id} not found`);
+      }
+
+      if (updateHospitalDto.admin) {
+        hospital.admins = [...(hospital.admins || []), updateHospitalDto.admin];
+      }
+
+      Object.assign(hospital, updateHospitalDto);
+      return this.hospitalRepository.save(hospital);
+    } catch (err) {
+      console.log(err, "errorCheck");
     }
-    return updatedHospital;
   }
 
   async remove(id: string) {
@@ -86,5 +95,9 @@ export class HospitalsService {
     if (result.affected === 0) {
       throw new NotFoundException(`Hospital with ID ${id} not found`);
     }
+    return {
+      statusCode: HttpStatus.CREATED,
+      message: "Hospital deleted successfully",
+    };
   }
 }
