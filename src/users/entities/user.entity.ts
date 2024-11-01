@@ -27,10 +27,10 @@ export class User {
   last_name: string;
 
   @Column("enum", {
-    enum: ["superAdmin", "client", "user", "staff"],
+    enum: ["superAdmin", "client", "user", "staff" ,"hsAdmin"],
     nullable: true,
   })
-  user_type: "superAdmin" | "client" | "user" | "staff";
+  user_type: "superAdmin" | "client" | "user" | "staff" | "hsAdmin";
 
   @Column("varchar", { unique: true, nullable: true })
   email: string;

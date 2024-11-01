@@ -7,13 +7,14 @@ import { Repository } from "typeorm";
 @Injectable()
 export class RoleSeeder implements Seeder {
   constructor(
-    @InjectRepository(Role) private roleRepository: Repository<Role>,
+    @InjectRepository(Role) private roleRepository: Repository<Role>
   ) {}
 
   async seed(): Promise<any> {
     // Generate and insert  data
     const roles = [
       { name: "admin" },
+      { name: "hsEmployee" },
       { name: "superAdmin" },
       { name: "user" },
       { name: "doctor" },

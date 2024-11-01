@@ -7,6 +7,7 @@ import { UsersModule } from "./users/users.module";
 import { RolesModule } from "./roles/roles.module";
 import { AuthModule } from "./auth/auth.module";
 import { CommonModule } from "./common/common.module";
+import { HospitalsModule } from './hospitals/hospitals.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CommonModule } from "./common/common.module";
     RolesModule,
     AuthModule,
     CommonModule,
+    HospitalsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

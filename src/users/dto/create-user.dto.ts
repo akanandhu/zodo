@@ -14,8 +14,8 @@ export class CreateUserDto {
   last_name: string;
 
   @IsOptional()
-  @IsEnum(["superAdmin", "client", "user", "staff"])
-  user_type?: "superAdmin" | "client" | "user" | "staff";
+  @IsEnum(["superAdmin", "client", "user", "staff", "hsAdmin"])
+  user_type?: "superAdmin" | "client" | "user" | "staff" | "hsAdmin";
 
   @IsOptional()
   @IsEmail()
