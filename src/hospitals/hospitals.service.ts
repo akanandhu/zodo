@@ -11,6 +11,7 @@ import { Hospital } from "./entities/hospital.entity";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { UsersService } from "src/users/users.service";
+import { paginate, PaginateQuery } from "nestjs-paginate";
 
 @Injectable()
 export class HospitalsService {
@@ -55,8 +56,11 @@ export class HospitalsService {
     }
   }
 
-  findAll(): Promise<Hospital[]> {
-    return this.hospitalRepository.find();
+  findAll(query: PaginateQuery) {
+    return paginate(query, this.hospitalRepository, {
+      sortableColumns: ['id'],
+      maxLimit: 20
+    })
   }
 
   async findOne(id: string): Promise<Hospital> {
